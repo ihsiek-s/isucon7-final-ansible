@@ -1,0 +1,36 @@
+---
+  - name: git clone xbuild
+    become: no
+    git:
+      repo: 'https://github.com/tagomoris/xbuild.git'
+      dest: /home/isucon/xbuild
+
+  - name: mkdir local
+    become: no
+    file:
+      path: /home/isucon/local
+      state: directory
+
+  - name: Install xbuild
+    become: no
+    shell: 'xbuild/{{ item.lang }}-install -f {{ item.version }} /home/isucon/local/{{ item.lang }} {{ item.option }}'
+    args:
+      chdir: /home/isucon
+    with_items:
+      - { lang: ruby,   version: 2.4.2,  option: "" }
+      - { lang: perl,   version: 5.26.1, option: "" }
+      - { lang: node,   version: v8.9.1, option: "" }
+      - { lang: go,     version: 1.9.2,  option: "" }
+      - { lang: python, version: 3.6.2,  option: "" }
+      - { lang: php,    version: 7.1.9,  option: " -- --disable-phar --with-pcre-regex --with-zlib --enable-fpm --enable-pdo --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-openssl --with-pcre-regex --with-pcre-dir --with-libxml-dir --enable-opcache --enable-bcmath --with-bz2 --enable-calendar --enable-cli --enable-shmop --enable-sysvsem --enable-sysvshm --enable-sysvmsg --enable-mbregex --enable-mbstring --with-mcrypt --enable-pcntl --enable-sockets --with-curl --enable-zip --with-pear --with-gmp" }
+
+  - name: Set application path
+    blockinfile:
+      path: '/home/isucon/.bashrc'
+      block: |
+        export PATH=$HOME/local/go/bin:$HOME/go/bin:$PATH
+        export PATH=$HOME/local/ruby/bin:$PATH
+        export PATH=$HOME/local/python/bin:$PATH
+        export PATH=$HOME/local/node/bin:$PATH
+        export PATH=$HOME/local/perl/bin:$PATH
+        export PATH=$HOME/local/php/bin:$PATH

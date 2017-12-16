@@ -1,0 +1,4 @@
+---
+  - name: Build go app
+    become: no
+    shell: '/home/isucon/local/go/bin/go get -u github.com/golang/dep/cmd/dep'

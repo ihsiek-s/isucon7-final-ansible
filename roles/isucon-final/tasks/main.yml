@@ -1,0 +1,9 @@
+---
+  - import_tasks: 01_apt_install.yml
+  - import_tasks: 02_git_clone.yml
+  - import_tasks: 03_xbuild.yml
+  - import_tasks: 04_build_go_app.yml
+  - import_tasks: 05_init_database.yml
+  - import_tasks: 06_setup_nginx.yml
+  - import_tasks: 07_build_webapp.yml
+  - import_tasks: 08_setup_systemd.yml

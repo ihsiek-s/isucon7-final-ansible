@@ -1,0 +1,20 @@
+---
+  - name: Copy Nginx conf
+    shell: 'cp /home/isucon/cco/files/cco.nginx.conf /etc/nginx/sites-available/nginx.conf'
+
+  - name: Remove default
+    file:
+      state: absent
+      path: /etc/nginx/sites-enabled/default
+
+  - name: Create Nginx link
+    file:
+      src: /etc/nginx/sites-available/nginx.conf
+      dest: /etc/nginx/sites-enabled/nginx.conf
+      state: link
+
+  - name: Restart Nginx
+    systemd:
+      name: nginx
+      daemon_reload: yes
+      state: restarted

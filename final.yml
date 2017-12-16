@@ -1,0 +1,11 @@
+- hosts: isucon
+  remote_user: isucon
+  become: true
+  gather_facts: no
+  pre_tasks:
+    - name: Update apt
+      raw: sudo apt update
+    - name: Install python2
+      raw: sudo apt install -y python-simplejson
+  roles:
+    - isucon-final

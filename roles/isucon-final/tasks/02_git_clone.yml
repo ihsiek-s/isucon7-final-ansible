@@ -1,0 +1,15 @@
+---
+  - name: git clone isucon7-final
+    become: no
+    git:
+      repo: 'https://github.com/isucon/isucon7-final'
+      dest: /home/isucon/cco
+
+  - name: Move app file
+    shell: 'mv {{ item.name }} {{ item.dest }}'
+    args:
+      chdir: /home/isucon/cco
+    with_items:
+      - { name: bench, dest: /home/isucon/bench }
+      - { name: portal, dest: /home/isucon/portal }
+      - { name: webapp, dest: /home/isucon/webapp }

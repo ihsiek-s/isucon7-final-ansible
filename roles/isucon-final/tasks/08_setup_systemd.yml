@@ -1,0 +1,16 @@
+---
+  - name: Copy systemd files
+    shell: 'cp {{ item }} /etc/systemd/system/{{ item }}'
+    args:
+      chdir: /home/isucon/cco/files
+    with_items:
+      - cco.golang.service
+      - cco.nodejs.service
+      - cco.perl.service
+      - cco.php.service
+      - cco.python.service
+      - cco.ruby.service
+
+  - name: Just reload systemd configs
+    systemd:
+      daemon_reload: yes

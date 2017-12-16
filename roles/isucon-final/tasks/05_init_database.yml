@@ -1,0 +1,7 @@
+---
+  - name: Init DB
+    shell: '/home/isucon/cco/db/init.sh'
+
+  - name: Create MySQL user
+    shell: mysql -e  "GRANT ALL ON isudb.* TO local_user@localhost IDENTIFIED BY 'password';"
+

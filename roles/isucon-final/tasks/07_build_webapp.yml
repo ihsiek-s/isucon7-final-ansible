@@ -1,0 +1,7 @@
+---
+# FIXME: isuconユーザーでgo参考実装をmakeしたいがPATHを読み込んでいないため、動作しない
+#  - name: Make go app
+#    become: no
+#    shell: 'make ensure && make'
+#    args:
+#      chdir: /home/isucon/webapp/go
